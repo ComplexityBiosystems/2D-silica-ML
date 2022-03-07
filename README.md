@@ -15,7 +15,6 @@ Font-Clos F, Zanchi M, Hiemer S, Bonfanti S, Guerra R, Zaiser M, Zapperi S.
 Predicting the failure of two-dimensional silica glasses. arXiv preprint arXiv:2201.09723. 2022 Jan 24.
 https://arxiv.org/abs/2201.09723
 
-
-
+Datasets related to this code: https://zenodo.org/deposit/6335037
 
 
