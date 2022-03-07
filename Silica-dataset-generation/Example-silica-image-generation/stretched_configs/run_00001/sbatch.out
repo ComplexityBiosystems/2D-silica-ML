@@ -1,0 +1,37 @@
+Job GL-00001 submitted from host frontend ; started Thu Mar 11 12:27:45 CET 2021 ; jobid 71581
+Running on host: node9.
+In directory: /storage/bonfanti/DeepGlass/test-configs-20210209-variable-disorder/run_00001 (Should be the same than this frontend).
+conf = 00001
+Elapsed seconds: 10601
+awk: ../get_fracture.awk:66:             if( dist2(x1[i],y1[i],z1[i],x1[j],y1[j],z1[j],lx1,ly1) < cutoff2_coord ) { nneigh[i]=nneigh[i]+1; neigh[i][nneigh[i]]=j }
+awk: ../get_fracture.awk:66:                                                                                                                       ^ syntax error
+awk: ../get_fracture.awk:66:             if( dist2(x1[i],y1[i],z1[i],x1[j],y1[j],z1[j],lx1,ly1) < cutoff2_coord ) { nneigh[i]=nneigh[i]+1; neigh[i][nneigh[i]]=j }
+awk: ../get_fracture.awk:66:                                                                                                                                 ^ syntax error
+awk: ../get_fracture.awk:74:         j1=neigh[i][1]
+awk: ../get_fracture.awk:74:                    ^ syntax error
+awk: ../get_fracture.awk:75:         j2=neigh[i][2]
+awk: ../get_fracture.awk:75:                    ^ syntax error
+awk: ../get_fracture.awk:66:             if( dist2(x1[i],y1[i],z1[i],x1[j],y1[j],z1[j],lx1,ly1) < cutoff2_coord ) { nneigh[i]=nneigh[i]+1; neigh[i][nneigh[i]]=j }
+awk: ../get_fracture.awk:66:                                                                                                                       ^ syntax error
+awk: ../get_fracture.awk:66:             if( dist2(x1[i],y1[i],z1[i],x1[j],y1[j],z1[j],lx1,ly1) < cutoff2_coord ) { nneigh[i]=nneigh[i]+1; neigh[i][nneigh[i]]=j }
+awk: ../get_fracture.awk:66:                                                                                                                                 ^ syntax error
+awk: ../get_fracture.awk:74:         j1=neigh[i][1]
+awk: ../get_fracture.awk:74:                    ^ syntax error
+awk: ../get_fracture.awk:75:         j2=neigh[i][2]
+awk: ../get_fracture.awk:75:                    ^ syntax error
+awk: ../get_fracture.awk:66:             if( dist2(x1[i],y1[i],z1[i],x1[j],y1[j],z1[j],lx1,ly1) < cutoff2_coord ) { nneigh[i]=nneigh[i]+1; neigh[i][nneigh[i]]=j }
+awk: ../get_fracture.awk:66:                                                                                                                       ^ syntax error
+awk: ../get_fracture.awk:66:             if( dist2(x1[i],y1[i],z1[i],x1[j],y1[j],z1[j],lx1,ly1) < cutoff2_coord ) { nneigh[i]=nneigh[i]+1; neigh[i][nneigh[i]]=j }
+awk: ../get_fracture.awk:66:                                                                                                                                 ^ syntax error
+awk: ../get_fracture.awk:74:         j1=neigh[i][1]
+awk: ../get_fracture.awk:74:                    ^ syntax error
+awk: ../get_fracture.awk:75:         j2=neigh[i][2]
+awk: ../get_fracture.awk:75:                    ^ syntax error
+awk: ../get_fracture.awk:66:             if( dist2(x1[i],y1[i],z1[i],x1[j],y1[j],z1[j],lx1,ly1) < cutoff2_coord ) { nneigh[i]=nneigh[i]+1; neigh[i][nneigh[i]]=j }
+awk: ../get_fracture.awk:66:                                                                                                                       ^ syntax error
+awk: ../get_fracture.awk:66:             if( dist2(x1[i],y1[i],z1[i],x1[j],y1[j],z1[j],lx1,ly1) < cutoff2_coord ) { nneigh[i]=nneigh[i]+1; neigh[i][nneigh[i]]=j }
+awk: ../get_fracture.awk:66:                                                                                                                                 ^ syntax error
+awk: ../get_fracture.awk:74:         j1=neigh[i][1]
+awk: ../get_fracture.awk:74:                    ^ syntax error
+awk: ../get_fracture.awk:75:         j2=neigh[i][2]
+awk: ../get_fracture.awk:75:                    ^ syntax error

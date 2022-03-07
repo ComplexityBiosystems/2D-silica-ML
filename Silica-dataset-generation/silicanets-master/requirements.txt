@@ -1,0 +1,10 @@
+tensorflow
+ipykernel
+temppathlib
+networkx
+matplotlib
+pandas
+scipy
+numpy
+imageio
+fire

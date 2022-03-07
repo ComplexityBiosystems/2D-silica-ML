@@ -1,0 +1,40 @@
+clear
+
+units           lj
+dimension       3
+atom_style      molecular
+boundary        p p p 
+
+# --------------ATOM DEFINITION ----------------------------------
+bond_style      harmonic
+
+read_data       test.lammps
+
+atom_modify      sort 1 5.0
+pair_style       none
+
+# FFC: to be 100% sure should be set to > 1/2 box size
+# see https://lammps.sandia.gov/threads/msg35576.html
+# the value 1.1 works well only on hex initial lattice
+# but fails later on during MCMC.
+comm_modify cutoff 5
+
+# --- set thermo output ---
+variable        dinterval equal 1
+
+thermo          ${dinterval}
+thermo_style    custom step  pe
+
+
+
+# --- dump rules ---
+min_style        fire
+minimize         1e-10 1e-10 10000000 10000000
+
+dump		particle_dump all custom 1 particles.dat	&
+			id x y 
+dump_modify	particle_dump sort id format line "%d %20.20g %20.20g"
+    
+#dump      1 all atom 1 tmp.dump
+run      0
+undump particle_dump

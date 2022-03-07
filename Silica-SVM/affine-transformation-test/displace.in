@@ -1,0 +1,80 @@
+# Athermal quasistatic shear deformation
+
+# positive direction
+
+if "${dir} == 1" then &
+   "variable       dir_name string +xy"
+if "${dir} == 2" then &
+   "variable       dir_name string +xz"
+if "${dir} == 3" then &
+   "variable       dir_name string +yz"
+if "${dir} == 4" then &
+   "variable       dir_name string -xy"
+if "${dir} == 5" then &
+   "variable       dir_name string -xz"
+if "${dir} == 6" then &
+   "variable       dir_name string -yz"
+
+log            SiO2-BKS_${seed1}-${seed2}.data_aqs-unishear-${dir_name}-strainincrement${strain_incr}.log
+
+clear
+read_restart SiO2-BKS_${seed1}-${seed2}.data_nvt-dt0.001-t300K-t300K_1.rst
+
+pair_style zero 10 nocoeff
+pair_coeff 1 1 5
+pair_coeff 1 2 5
+pair_coeff 2 2 5
+
+if "${dir} == 1" then &
+   "variable       strain equal (xy-${xy0})/${ly0}"
+if "${dir} == 2" then &
+   "variable       strain equal (xz-${xz0})/${lz0}"
+if "${dir} == 3" then &
+   "variable       strain equal (yz-${yz0})/${lz0}"
+if "${dir} == 4" then &
+   "variable       strain equal (${xy0}-xy)/${ly0}"
+if "${dir} == 5" then &
+   "variable       strain equal (${xz0}-xz)/${lz0}"
+if "${dir} == 6" then &
+   "variable       strain equal (${yz0}-yz)/${lz0}"
+
+thermo_style   custom step v_strain pxx pyy pzz pxy pxz pyz ke pe evdwl ecoul density press vol
+thermo         100
+thermo_modify  flush yes
+
+reset_timestep 0
+
+change_box     all triclinic
+
+reset_timestep 0
+
+write_dump 		 all custom SiO2-BKS_${seed1}-${seed2}.data_aqs-unishear-${dir_name}-strainincrement${strain_incr}.dump id type x y z ix iy iz modify sort id format float %20.15g
+
+thermo_style   custom step v_strain pxx pyy pzz pxy pxz pyz ke pe evdwl temp press lx ly lz xy xz yz
+thermo         1
+thermo_modify  flush yes
+
+variable       a loop $(round(v_final_strain/v_strain_incr))
+label          loopa
+
+if "${dir} == 1" then &
+   "change_box     all xy delta $(v_strain_incr * v_ly0) remap units box"
+if "${dir} == 2" then &
+   "change_box     all xz delta $(v_strain_incr * v_lz0) remap units box"
+if "${dir} == 3" then &
+   "change_box     all yz delta $(v_strain_incr * v_lz0) remap units box"
+if "${dir} == 4" then &
+   "change_box     all xy delta $(-v_strain_incr * v_ly0) remap units box"
+if "${dir} == 5" then &
+   "change_box     all xz delta $(-v_strain_incr * v_lz0) remap units box"
+if "${dir} == 6" then &
+   "change_box     all yz delta $(-v_strain_incr * v_lz0) remap units box"
+
+min_style      cg
+minimize       1.0e-5 5.0e-6 100000000 1000000000
+
+if "$(v_a%v_dump_frequ) == 0" then &
+  "write_dump 		 all custom SiO2-BKS_${seed1}-${seed2}.data_aqs-unishear-${dir_name}-strainincrement${strain_incr}.dump id type x y z ix iy iz modify sort id format float %20.15g append yes"
+
+next           a
+jump           SELF loopa

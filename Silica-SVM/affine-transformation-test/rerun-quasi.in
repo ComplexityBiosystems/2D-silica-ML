@@ -1,0 +1,57 @@
+# Create binary glass by randomly inserting particles. Variables are A, B which
+# give the stochiometric composition of the glass, the number of particles
+# N_particles which is adjusted according to stochiometry, the initial
+# density init_dens.
+#
+# cutoff for the short range is recommended as 5.5 better densities and 11 for
+# mechanical properties. The Coulomb interaction transitions at 10 A:
+# Sundararaman, Siddharth, Wai-Yim Ching, and Liping Huang. "Mechanical properties of silica glass predicted by a pair-wise potential in molecular dynamics simulations." Journal of Non-Crystalline Solids 445 (2016): 102-109.
+
+variable        seed1 equal 554195833
+variable        seed2 equal 975147688
+
+# ----------------------- Initialize ----------------------------------
+
+log 		        None
+
+boundary        p p p
+dimension	      3
+
+units           metal
+atom_style      charge
+pair_style		  hybrid/overlay buck/coul/long 5.5 10.0 table linear 39901
+
+read_restart    SiO2-BKS_${seed1}-${seed2}.data_nvt-dt0.001-t300K-t300K_1.rst
+
+# No interactions between Si atoms
+# BKS interaction in PRL 64 1955 (1990)
+# See the potential file for more information
+pair_style zero 10 nocoeff
+pair_coeff 1 1 5
+pair_coeff 1 2 5
+pair_coeff 2 2 5
+
+# ----------------------- Quasistatic Shear ----------------------------------
+
+variable       strain_incr equal 0.0001
+variable       final_strain equal 0.01
+variable       dump_frequ equal 20
+
+# save initial box parameters
+variable tmp equal "lx"
+variable lx0 equal ${tmp}
+variable tmp equal "ly"
+variable ly0 equal ${tmp}
+variable tmp equal "lz"
+variable lz0 equal ${tmp}
+variable tmp equal "xy"
+variable xy0 equal ${tmp}
+variable tmp equal "xz"
+variable xz0 equal ${tmp}
+variable tmp equal "yz"
+variable yz0 equal ${tmp}
+
+
+variable dir equal 1
+include displace.in
+#variable dir delete
